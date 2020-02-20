@@ -1,0 +1,36 @@
+﻿<div>
+    <div class="navbar-menu">
+        <div class="navbar-start" style="margin-top:5px">
+            <label for="Lucas Juliano" class="lbl-titulo-board">@Title</label>
+
+            <ButtonIcon Style="margin-left:5px" Icon="far fa-star" />
+
+            <button class="button btn-boards is-small">
+                <span>Quadros</span>&nbsp;
+                <span class="tag is-info is-rounded btn-boards-type">Free</span>
+            </button>
+
+            <ButtonIcon Label="Particular" Icon="fas fa-lock" />
+
+            <figure class="image is-32x32" style="margin-top:5px;margin-right:5px">
+                <img class="is-rounded" src="https://trello-avatars.s3.amazonaws.com/56d80c98213de6cf5319b5ce3037880d/30.png" />
+            </figure>
+
+            <ButtonIcon Label="Convidar" />
+        </div>
+
+        <div class="navbar-end">
+            <ButtonIcon Label="Clean Board" Icon="far fa-trash-alt" OnClickAsync="OnClickAsync" />
+            <ButtonIcon Label="Butler (3 Tips)" Icon="fab fa-trello" />
+            <ButtonIcon Label="Show Menu" Icon="fab fa-trello" />
+        </div>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnClickAsync { get; set; }
+}

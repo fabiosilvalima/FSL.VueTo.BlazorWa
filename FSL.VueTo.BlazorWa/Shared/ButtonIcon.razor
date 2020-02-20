@@ -1,0 +1,56 @@
+﻿@using FSL.Framework.Core.Extensions
+
+<div style="@(Style)">
+    <button class="button is-small btn-container" @onclick="OnClickingAsync">
+        @if (!Icon.IsNullOrEmpty())
+        {
+            <span class="icon @Size">
+                <i class="@Icon"></i>
+            </span>
+        }
+        @if (!Label.IsNullOrEmpty())
+        {
+            <span v-if="label">@Label</span>
+        }
+    </button>
+</div>
+
+@code{
+    [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
+
+    [Parameter]
+    public string Size { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; }
+
+    [Parameter]
+    public string Style { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnClickAsync { get; set; }
+
+    protected async Task OnClickingAsync(
+        EventArgs e)
+    {
+        if (OnClickAsync.IsNotNull())
+        {
+            await OnClickAsync.InvokeAsync(Label);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Size = Size ?? "is-small";
+        Label = Label ?? "";
+        Color = Color ?? "";
+        Style = Style ?? "";
+        Icon = Icon ?? "";
+    }
+}

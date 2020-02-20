@@ -1,0 +1,53 @@
+﻿<div>
+    <div class="modal fade @Classes()">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head modal-body">
+                <p class="modal-card-title">
+                    @Title
+                </p>
+                <button class="delete" aria-label="close" @onclick="OnChangeAsync"></button>
+            </header>
+            <section class="modal-card-body modal-body">
+                <CascadingValue Value=this>
+                    @ChildContent
+                </CascadingValue>
+            </section>
+        </div>
+    </div>
+</div>
+
+@code{        
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _contador++;
+        base.OnAfterRender(firstRender);
+    }
+
+    private int _contador;
+
+    private string Classes()
+    {
+        return Toggle ? "is-active" : "";
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public bool Toggle { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ToggleChanged { get; set; }
+
+    protected async Task OnChangeAsync()
+    {
+        Toggle = false;
+
+        await ToggleChanged.InvokeAsync(Toggle);
+    }
+}

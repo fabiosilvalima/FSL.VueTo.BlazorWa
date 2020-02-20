@@ -1,0 +1,83 @@
+﻿@using FSL.VueTo.Core.Models
+@using FSL.Framework.Core.Extensions
+
+<div class="lists-container" id="style-2">
+    @foreach (var list in Lists)
+    {
+        <section class="list-container" ref="@list.Id" data-id="@list.Id">
+
+            <div class="list-header">@list.Title</div>
+
+            <div>
+                @foreach (var item in list.Items)
+                {
+                    <Card Item="item" />
+                }
+            </div>
+
+            <div class="footer-container-list">
+                <button class="button is-light is-fullwidth" @onclick="a => OnAddCard(list.Id)">
+                    <span class="icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>Add New Card</span>
+                </button>
+            </div>
+        </section>
+    }
+
+    <div class="add-list-container">
+        <AddList Placeholder="Add New List" OnClickAsync="OnClickingAsync" />
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public List<ListItem> Lists { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Lists = Lists ?? new List<ListItem>();
+        Title = Title ?? "";
+        Placeholder = Placeholder ?? "";
+    }
+
+    [Parameter]
+    public EventCallback<string> OnClickAsync { get; set; }
+
+    protected async Task OnClickingAsync(
+        string title)
+    {
+        Lists.Add(new ListItem
+        {
+            Title = title,
+            Id = Guid.NewGuid().ToString()
+        });
+
+        if (OnClickAsync.IsNotNull())
+        {
+            await OnClickAsync.InvokeAsync(Title);
+        }
+    }
+
+    protected void OnAddCard(
+        string listId)
+    {
+        var listItem = Lists.FirstOrDefault(x => x.Id == listId);
+
+        listItem.Items.Add(new Item
+        {
+            Id = Guid.NewGuid().ToString(),
+            Title = $"New Item",
+            Description = $"Item from list '{listId}'"
+        });
+    }
+}

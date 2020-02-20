@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs
+/FSL.Framework.Core/.vs
+/FSL.Framework.Core/bin
+/FSL.Framework.Core/obj
+/FSL.VueTo.BlazorWa/bin/Debug/netstandard2.1
+/FSL.VueTo.BlazorWa/.vs/FSL.VueTo.BlazorWa
+/FSL.VueTo.BlazorWa/obj
+*.user
+/FSL.VueTo.Core/bin/Debug/netstandard2.1
+/FSL.VueTo.Core/obj

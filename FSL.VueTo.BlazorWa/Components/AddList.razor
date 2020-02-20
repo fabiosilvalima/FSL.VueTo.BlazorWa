@@ -1,0 +1,66 @@
+﻿@using FSL.Framework.Core.Extensions
+
+<div class="ui-item-entry field has-addons">
+    <div class="control is-expanded">
+        <input class="input" @bind="input" placeholder="@Placeholder" @onkeyup="OnKeyUpAsync" />
+    </div>
+    @if (!Icon.IsNullOrEmpty())
+    {
+        <div class="control">
+            <button type="submit"
+                    class="button is-primary"
+                    @onclick="OnClickingAsync"
+                    disabled="@input.IsNullOrEmpty()">
+                <span class="icon is-small">
+                    <i class="fas fa-@Icon"></i>
+                </span>
+            </button>
+        </div>
+    }
+</div>
+
+@code{
+    string key = "";
+    string input = "";
+
+    [Parameter]
+    public string ListId { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Icon = Icon ?? "angle-right";
+    }
+
+    [Parameter]
+    public EventCallback<string> OnClickAsync { get; set; }
+
+    protected async Task OnClickingAsync(
+        EventArgs e)
+    {
+        if (OnClickAsync.IsNotNull())
+        {
+            await OnClickAsync.InvokeAsync(input);
+        }
+
+        input = "";
+    }
+
+    protected async Task OnKeyUpAsync(
+        KeyboardEventArgs e)
+    {
+        if (e.Key != "Enter")
+        {
+            return;
+        }
+
+        await OnClickingAsync(e);
+    }
+}

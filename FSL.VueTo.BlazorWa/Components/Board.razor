@@ -1,0 +1,48 @@
+﻿@using FSL.VueTo.Core.Models
+
+@page "/board/{id}/{title}"
+
+<div class="board">
+    <Header>
+        <Navbar Title="@Title" />
+    </Header>
+
+    <div class="board">
+        <ViewList Lists="lists" />
+    </div>
+</div>
+
+@code{
+    List<ListItem> lists;
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        var listId = Guid.NewGuid().ToString();
+
+        Title = "Lucas Juliano Company";
+        lists = new List<ListItem>();
+        lists.Add(new ListItem
+        {
+            Title = "List 1",
+            Id = listId,
+            Items = new List<Item>()
+            {
+                new Item
+                {
+                    Description = $"Item from list '{listId}'",
+                    Id = Guid.NewGuid().ToString(),
+                    Date = "",
+                    Title = "New Item"
+                }
+            }
+        });
+    }
+}

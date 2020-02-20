@@ -1,0 +1,42 @@
+﻿@using FSL.Framework.Core.Extensions
+
+<div class="query-form card">
+    <div class="card-content">
+        <h2 class="title">New Task</h2>
+        <ui-input name="title"
+                  label="Title"
+                  v-model="title"
+                  v-validate="'required'"
+                  :error="getError('title')"
+                  @enter="validate" />
+        <ui-input name="description" type="textarea" label="Description" v-model="description" />
+        <ui-input name="date" type="date" label="Date" v-model="date" @enter="validate" />
+        <div class="field is-grouped">
+            <ui-button type="primary" @onclick="OnClickingButtonAsync">@(!Id.IsNullOrEmpty() ? "Update" : "Add")</ui-button>
+            <ui-button type="text" @onclick="OnClickingCancelAsync">Cancel</ui-button>
+        </div>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnCancelAsync { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnButtonAsync { get; set; }
+
+    protected async Task OnClickingCancelAsync(
+        EventArgs e)
+    {
+        await OnCancelAsync.InvokeAsync(Id);
+    }
+
+    protected async Task OnClickingButtonAsync(
+        EventArgs e)
+    {
+        await OnButtonAsync.InvokeAsync(Id);
+    }
+}

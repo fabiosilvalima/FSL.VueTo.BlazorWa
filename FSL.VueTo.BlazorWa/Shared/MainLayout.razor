@@ -1,0 +1,174 @@
+﻿@inherits LayoutComponentBase
+
+ <style type="text/css">
+     html,
+     body {
+         background: #0079bf;
+     }
+
+     body {
+         font-family: "Roboto";
+         font-size: 22px;
+     }
+
+     .board {
+         min-height: 100%;
+     }
+
+     .btn-container {
+         margin: 5px;
+         margin-left: 1px;
+         background: #4d95be;
+         color: #fff;
+         border-color: #4d95be;
+     }
+
+     .btn-container:hover {
+         background: #0079bf;
+         border-color: #4d95be;
+         color: #fff;
+     }
+
+     .btn-container:focus {
+         background: #4d95be;
+         border-color: #4d95be;
+         color: #fff;
+     }
+
+     .btn-boards {
+         margin: 5px;
+         margin-left: 1px;
+         background: #4d95be;
+         color: #fff;
+         border-color: #4d95be;
+     }
+
+     .btn-boards-type {
+         background: #64aed8;
+         margin-left: 5px;
+         font-size: 10px;
+         font-weight: 400;
+     }
+
+     .lbl-titulo-board {
+         background: transparent;
+         cursor: default;
+         font-size: 18px;
+         font-weight: 700;
+         line-height: 32px;
+         padding: 0;
+         text-decoration: none;
+         max-width: calc(100% - 24px);
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+         margin-left: 30px;
+         color: #fff;
+     }
+
+     .cards-container {
+         max-height: 725px;
+         overflow: auto;
+     }
+
+     .list-container {
+         width: 320px;
+         padding: 10px;
+         margin: 5px;
+         margin-right: 1px;
+         background-color: #f3f3f3;
+         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
+         border-radius: 5px;
+         margin-bottom: 10px;
+     }
+
+     .lists-container {
+         display: flex;
+         overflow-x: auto;
+         margin-left: 10px;
+         margin-right: 5px;
+     }
+
+     .list-header {
+         margin-bottom: 5px;
+         font-weight: 600;
+         margin-left: 10px;
+         color: #67748a;
+     }
+
+     .card {
+         margin: 5px;
+         background-color: white;
+         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
+         padding: 10px;
+     }
+
+     .card-ghost {
+         transition: 0.25s all;
+         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+         transform: rotate(5deg);
+     }
+
+     .card-ghost-drop {
+         transform: scale(1);
+     }
+
+     .list-header {
+         font-size: 18px;
+     }
+
+     .list-drag-handle {
+         cursor: move;
+         padding: 5px;
+     }
+
+     .add-list-container {
+         margin-left: 10px;
+         margin-top: 5px;
+         width: 320px;
+     }
+
+     .footer-container-list {
+         width: 100%;
+     }
+
+     #style-1::-webkit-scrollbar-track {
+         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+         border-radius: 10px;
+         background-color: #f5f5f5;
+     }
+
+     #style-1::-webkit-scrollbar {
+         width: 9px;
+         background-color: #f5f5f5;
+     }
+
+     #style-1::-webkit-scrollbar-thumb {
+         border-radius: 10px;
+         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+         background-color: #bfc4ce;
+     }
+
+     /**scroll */
+     #style-2::-webkit-scrollbar-track {
+         padding: 10px;
+         /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);*/
+         border-radius: 10px;
+         background-color: #0067a3;
+     }
+
+     #style-2::-webkit-scrollbar {
+         width: 7px;
+         height: 12px;
+         background-color: #66a4c7;
+         border-radius: 10px;
+     }
+
+     #style-2::-webkit-scrollbar-thumb {
+         border-radius: 10px;
+         /*-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+         background-color: #66a4c7;
+     }
+ </style>
+
+@Body

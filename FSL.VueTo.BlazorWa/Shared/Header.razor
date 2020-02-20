@@ -1,0 +1,51 @@
+﻿<div>
+    <div class="navbar-menu" style="background:#0067A3">
+        <div class="navbar-start">
+            <!-- navbar items -->
+
+            <ButtonIcon Icon="fas fa-home" Style="margin-left:5px" OnClickAsync="OnClickAsync" />
+            <ButtonIcon Icon="fab fa-trello" Label="Quadros" />
+
+            <div class="field" style="margin:5px;margin-left:1px;">
+                <p class="control has-icons-right">
+                    <input class="input is-small"
+                           type="text"
+                           style="background:#4D95BE;color:#fff;border-color:#4D95BE" />
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="navbar-center">
+            <img src="img/logo-trello.png" />
+        </div>
+
+        <div class="navbar-end">
+            <ButtonIcon Icon="fas fa-plus" />
+            <ButtonIcon Icon="fas fa-exclamation-circle" />
+            <ButtonIcon Icon="far fa-bell" />
+
+            <figure class="image is-32x32" style="margin-top:5px;margin-right:5px">
+                <img class="is-rounded"
+                     src="https://trello-avatars.s3.amazonaws.com/56d80c98213de6cf5319b5ce3037880d/30.png" />
+            </figure>
+        </div>
+    </div>
+
+    <CascadingValue Value=this>
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code{
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnClickAsync { get; set; }
+}

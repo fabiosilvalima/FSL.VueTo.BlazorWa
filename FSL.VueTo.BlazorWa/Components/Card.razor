@@ -1,0 +1,52 @@
+﻿@using FSL.VueTo.Core.Models
+@using FSL.Framework.Core.Extensions
+
+<div class="card @Classes" data-id="@Item.Id">
+    <div class="icons">
+        <span v-if="isDue"
+              class="icon icon-due has-text-warning"
+              title="@($"Item is due on {Item.Date}")">
+            <i class="fas fa-star"></i>
+        </span>
+        <span v-else-if="timestamp"
+              class="icon icon-date"
+              title="@($"Item is due on {Item.Date}")">
+            <i class="far fa-bell"></i>
+        </span>
+        <span class="icon icon-edit" @onclick="a => _dialog = true">
+            <i class="fas fa-edit"></i>
+        </span>
+    </div>
+    <div class="list-drag-handle">
+        <p class="item-title">@Item.Title</p>
+        @if (!Item.Description.IsNullOrEmpty())
+        {
+            <p class="item-description">@Item.Description</p>
+        }
+    </div>
+
+    <Dialog Title="@Item.Title" @bind-Toggle="@_dialog">
+        <div>
+            <small>Title : @Item.Title</small>
+            <p>
+                Description : @Item.Description
+            </p>
+        </div>
+    </Dialog>
+
+</div>
+
+@code{     
+    protected override void OnInitialized()
+    {
+        _dialog = false;
+    }
+
+    bool _dialog = false;
+
+    [Parameter]
+    public string Classes { get; set; }
+
+    [Parameter]
+    public Item Item { get; set; }
+}

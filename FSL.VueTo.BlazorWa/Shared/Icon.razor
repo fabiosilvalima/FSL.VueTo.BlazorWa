@@ -1,0 +1,11 @@
+﻿<v-icon small color="@Color">@NameLabel</v-icon>
+
+@code{
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
+
+    private string NameLabel => $"mdi-{Name}";
+}
